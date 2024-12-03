@@ -11,8 +11,8 @@ let confirmPassword = document.getElementById('confirmPassword');
 
 const checkRequiredField = (inputArr) => {
     inputArr.forEach((input) => {
-        if(username.value === ''){
-            showError(input);
+        if(input.value === ''){
+            showError(input , `${getFieldName(massage)} cannot be empty`);
         }else{
             successError(input);
         }
@@ -20,13 +20,23 @@ const checkRequiredField = (inputArr) => {
 }
 
 // show error 
-const showError = (input) => {
+const showError = (input , massage) => {
         let formControl = input.parentElement;
         formControl.className = 'form-control error';
-        formControl.querySelector("small").innerHTML = 'msg';
+        formControl.querySelector("small").innerHTML = massage;
 }
 
-// get
+// Get Field Name 
+const getFieldName = (input) => {
+    return input.id[0].toUpperCase() + input.id.slice(1);
+}
+
+// Get Length 
+const checkLength = (input) => {
+    if(input.value.length){
+        showError(input)
+    }
+}
 
 // success error
 const successError = (input) => {
@@ -40,4 +50,7 @@ form.addEventListener('submit',function(event){
 
     // check required 
     checkRequiredField([username, email, password, confirmPassword]);
+
+    // check length 
+    checkLength([username]);
 });
