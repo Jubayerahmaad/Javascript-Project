@@ -34,7 +34,7 @@ const getFieldName = (input) => {
 // Get Length 
 const checkLength = (input) => {
     if(input.value.length){
-        showError(input)
+        showError(input, massage)
     }
 }
 
